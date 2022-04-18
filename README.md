@@ -1,2 +1,1 @@
-# sqlSnippets
-SQL snippets 
+SQL Code Snippets with examples and scenarios.
