@@ -17,3 +17,8 @@ SELECT title, length, rental_rate, replacement_cost
 FROM film
 ORDER BY length ASC, rental_rate DESC, replacement_cost ASC
 LIMIT 5;
+
+-- if the customer is willing to watch movies that are having less than 50 minutes of run time, what are the options does he have?
+SELECT COUNT(title)
+FROM film
+WHERE length <= 50;
