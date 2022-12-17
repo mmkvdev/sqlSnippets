@@ -1,79 +1,37 @@
--- challenge 1
+SELECT * FROM payment;
 
--- how many payment transactions that are greater than $5.00? -> ans: 3618
-
-SELECT *
+SELECT customer_id, SUM(amount)
 FROM payment
-WHERE amount > 5.00;
+WHERE amount > 10
+GROUP BY customer_id;
 
--- count
-SELECT COUNT(amount)
+SELECT DISTINCT(staff_id)
+FROM payment;
+
+SELECT staff_id, COUNT(amount)
 FROM payment
-WHERE amount > 5.00;
+GROUP BY staff_id;
 
+-- staff ids that handled most count of payments
+SELECT staff_id, COUNT(payment_id)
+FROM payment
+GROUP BY staff_id;
 
+SELECT * FROM film;
 
--- challenge 2
-
--- how many actors have a first name that starts with letter P? ans: 5
-SELECT * FROM actor;
-
-SELECT COUNT(first_name)
-FROM actor
-WHERE first_name LIKE 'P%';
-
-SELECT first_name
-FROM actor
-WHERE first_name LIKE 'P%';
-
-
-
--- challenge 3
-
--- how many unique districts are our customers from? ans: 378
-
-SELECT *
-FROM address;
-
-SELECT COUNT(DISTINCT (district))
-FROM address;
-
-SELECT DISTINCT (district)
-FROM address
-ORDER BY district;
-
-
--- challenge 4
-
--- retrieve the list of names for those disctinct districts where are our customers are from? ans: upon command execution
-
-SELECT DISTINCT(district)
-FROM address;
-
-
--- challenge 5
-
--- how many films have a rating of R and a replacement cost between $5 and $15? ans: 52
-
-SELECT COUNT(*)
+SELECT rating, AVG(replacement_cost)
 FROM film
-WHERE rating = 'R' AND replacement_cost BETWEEN 5 AND 15;
+GROUP BY rating;
 
-SELECT title
+-- average replacement per rating
+SELECT rating, ROUND(AVG(replacement_cost),2)
 FROM film
-WHERE rating = 'R' AND replacement_cost BETWEEN 5 AND 15;
+GROUP BY rating;
 
--- challenge 6
+SELECT * FROM customer;
 
--- how many films have the word `Truman` somewhere in the title? ans: 5
-
-SELECT *
-FROM film
-WHERE title LIKE '%Truman%';
-
-SELECT COUNT(*)
-FROM film
-WHERE title LIKE '%Truman%';
-
-
-
+SELECT customer_id, SUM(amount)
+FROM payment
+GROUP BY customer_id
+ORDER BY SUM(amount) DESC
+LIMIT 5;
